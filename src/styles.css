@@ -1,1 +1,16 @@
-/* You can add global styles to this file, and also import other style files */
+
+@import url('./style/nav.css');
+@import url('./style/home.css');
+@import url('./style/catalog.css');
+@import url('./style/forms.css');
+@import url('./style/details.css');
+@import url('./style/profile.css');
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    font-size: 20px;
+}

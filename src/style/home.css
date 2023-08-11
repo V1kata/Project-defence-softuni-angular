@@ -1,0 +1,22 @@
+main {
+    color: aqua;
+    text-align: center;
+    padding-top: 150px;
+}
+
+.errorContainer {
+    position: fixed;
+    top: 90px;
+    right: 80px;
+    width: 380px;
+    min-width: 100px;
+    border-radius: 20px;
+    color: rgb(255, 255, 255);
+}
+
+.errorContainer > p {
+    background: rgba(219, 24, 24, 0.884);
+    font-size: 25px;
+    padding: 20px;
+    border-radius: 25px;
+}
