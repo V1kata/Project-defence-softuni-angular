@@ -1,1 +1,20 @@
-<p>main works!</p>
+<main>
+    <section id="home-main">
+        <h1>
+            Come and have fun Bidding on
+        </h1>
+        <!-- <img src="./images/home.jpg" alt="" /> -->
+    </section>
+
+    <input type="time" value="21:00" class="clock">
+
+    <script>
+        const clock = document.querySelector('.clock');
+        const today = new Date();
+        const hours = String(today.getHours()).padStart(2, '0');
+        const minutes = String(today.getMinutes() + 58).padStart(2, '0');
+        const time = `${hours}:${minutes}`; 
+        clock.value = time;
+        console.log(clock.value)
+    </script>
+</main>

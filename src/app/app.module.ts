@@ -6,16 +6,12 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { MainComponent } from './main/main.component';
 import { CatalogComponent } from './catalog/catalog.component';
-import { EditComponent } from './edit/edit.component';
-import { DetailsComponent } from './details/details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
-    CatalogComponent,
-    EditComponent,
-    DetailsComponent
+    CatalogComponent
   ],
   imports: [
     BrowserModule,

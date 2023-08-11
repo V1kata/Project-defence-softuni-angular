@@ -13,7 +13,11 @@ import { ProfileComponent } from './profile/profile.component';
     ProfileComponent
   ],
   imports: [
-    CommonModule
-  ]
+    CommonModule,
+    LoginComponent,
+    RegisterComponent,
+    ProfileComponent,
+  ],
+
 })
 export class UserModule { }
