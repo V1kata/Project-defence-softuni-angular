@@ -35,3 +35,17 @@ nav > ul > li > a:hover {
     background-color: rgba(104, 33, 33, 0.63);
     box-shadow: 4px 4px black;
 }
+
+nav > ul > li > a:hover {
+    background-color: green;
+    box-shadow: 4px 4px black;
+}
+
+.active {
+    background-color: darkred;
+    pointer-events: none;
+}
+
+.active:hover {
+    box-shadow: none;
+}
