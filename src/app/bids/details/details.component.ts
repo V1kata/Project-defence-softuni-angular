@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
 import { BidItems } from 'src/app/types/BidItem';
 import { User } from 'src/app/types/User';
@@ -19,7 +19,8 @@ export class DetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private apiService: ApiService,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -36,6 +37,7 @@ export class DetailsComponent implements OnInit {
               if (this.userService.user) {
                 const currentUser: User = this.userService.user;
                 this.owner = currentUser.posts.find(id => id === res.objectId) ? true : false;
+                console.log(this.owner)
               }
 
               if (res.bids.length > 0) {
@@ -61,4 +63,9 @@ export class DetailsComponent implements OnInit {
       });
     }
   }
+
+  deleteBid(id: string | undefined): void {
+    this.apiService.deleteBid(id);
+    this.router.navigate(['/catalog']);
+  } 
 }

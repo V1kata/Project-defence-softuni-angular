@@ -20,8 +20,8 @@ import { appInterceptorProvider } from './api.interceptor';
     AppRoutingModule,
     HttpClientModule,
     CoreModule,
-    UserModule,
     BidsModule,
+    UserModule,
   ],
   providers: [appInterceptorProvider],
   bootstrap: [AppComponent]

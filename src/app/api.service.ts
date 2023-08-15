@@ -35,4 +35,9 @@ export class ApiService {
     const request = this.http.put<BidItems>(`${this.appUrl}/classes/BidItems/${id}`, data, { headers: this.headers });
     return request;
   }
+
+  deleteBid(id: string | undefined) {
+    const request = this.http.delete(`${this.appUrl}/classes/BidItems/${id}`, { headers: this.headers })
+    return request;
+  }
 }
