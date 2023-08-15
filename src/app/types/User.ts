@@ -3,9 +3,7 @@ export interface User {
     "email": string,
     "password": string,
     "imageUrl": string,
-    "posters": string[]
+    "posts": string[],
+    "sessionToken": string,
+    "objectId": string | undefined
 }
-
-// export interface CallBackAfterCreate {
-
-// }

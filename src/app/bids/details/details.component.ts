@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
 import { BidItems } from 'src/app/types/BidItem';
+import { User } from 'src/app/types/User';
 import { UserService } from 'src/app/user/user.service';
 
 @Component({
@@ -10,6 +11,7 @@ import { UserService } from 'src/app/user/user.service';
   styleUrls: ['./details.component.css'],
 })
 export class DetailsComponent implements OnInit {
+  owner: boolean = false;
   selectedItem: BidItems | null = null;
   username: string | null = null;
   lastBidder: string = '';
@@ -17,7 +19,7 @@ export class DetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private apiService: ApiService,
-    private userServise: UserService
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
@@ -26,14 +28,26 @@ export class DetailsComponent implements OnInit {
       this.apiService.getSpecificBid(id).subscribe({
         next: (res) => {
           this.selectedItem = res;
-          console.log(res)
 
-          this.userServise.getUserProfile(res.author['objectId']).subscribe({
+          this.userService.getUserProfile(res.author['objectId']).subscribe({
             next: (userRef) => {
               this.username = userRef.username;
 
+              if (this.userService.user) {
+                const currentUser: User = this.userService.user;
+                this.owner = currentUser.posts.find(id => id === res.objectId) ? true : false;
+              }
+
               if (res.bids.length > 0) {
-                this.userServise.getUserProfile(res.bids[res.bids.length]);
+                const lastBidUserId = res.bids[res.bids.length - 1];
+                this.userService.getUserProfile(lastBidUserId).subscribe({
+                  next: (lastBidUser) => {
+                    this.lastBidder = lastBidUser.username;
+                  },
+                  error: (err) => {
+                    console.log(err);
+                  },
+                });
               }
             },
             error: (err) => {

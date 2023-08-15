@@ -5,10 +5,16 @@
   <ul>
     <li><a routerLink="/home" appNavActive>Home</a></li>
     <li><a routerLink="/catalog" appNavActive>Catalog</a></li>
-    <li><a routerLink="/create" appNavActive>Create</a></li>
-    <li><a routerLink="/profile" appNavActive>Profile</a></li>
-    <li><a routerLink="/login" appNavActive>Login</a></li>
-    <li><a routerLink="/register" appNavActive>Register</a></li>
-    <li><a routerLink="/logout" appNavActive>Logout</a></li>
+
+    <ng-container *ngIf="!isLoggedIn">
+      <li><a routerLink="/login" appNavActive>Login</a></li>
+      <li><a routerLink="/register" appNavActive>Register</a></li>
+    </ng-container>
+
+    <ng-container *ngIf="isLoggedIn">
+      <li><a routerLink="/create" appNavActive>Create</a></li>
+      <li><a routerLink="/profile" appNavActive>Profile</a></li>
+      <li><a routerLink="#" (click)="logout()" appNavActive>Logout</a></li>
+    </ng-container>
   </ul>
 </nav>
