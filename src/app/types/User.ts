@@ -5,3 +5,7 @@ export interface User {
     "imageUrl": string,
     "posters": string[]
 }
+
+// export interface CallBackAfterCreate {
+
+// }

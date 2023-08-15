@@ -8,6 +8,13 @@ export interface BidItems {
   typeOfPurchase: string;
   author: Author;
   bids: string[];
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface CallBackAfterCreate {
+  createdAt: string;
+  objectId: string;
 }
 
 interface Author {

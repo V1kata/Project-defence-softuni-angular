@@ -5,6 +5,7 @@ import { DetailsComponent } from './details/details.component';
 import { EditComponent } from './edit/edit.component';
 import { BidsRoutingModule } from './bids-routing.module';
 import { CreateComponent } from './create/create.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -12,11 +13,12 @@ import { CreateComponent } from './create/create.component';
     CatalogComponent,
     DetailsComponent,
     EditComponent,
-    CreateComponent
+    CreateComponent,
   ],
   imports: [
     CommonModule,
-    BidsRoutingModule
+    BidsRoutingModule,
+    FormsModule,
   ],
   
 })

@@ -10,13 +10,24 @@ export class ApiService {
   private appUrl = environment.appUrl;
   private headers = new HttpHeaders({
     'X-Parse-Application-Id': environment.appId,
-    'X-Parse-JavaScript-Key': environment.javascriptKey
+    'X-Parse-JavaScript-Key': environment.javascriptKey,
+    'Content-Type': 'application/json'
   });
 
   constructor(private http: HttpClient) { }
 
   getCatalog() {
     const request = this.http.get<BidItems[]>(`${this.appUrl}/classes/BidItems`, { headers: this.headers })
+    return request;
+  }
+
+  createBid(data: BidItems) {
+    const request = this.http.post(`${this.appUrl}/classes/BidItems`, data, { headers: this.headers });
+    return request;
+  }
+
+  getSpecificBid(id: string) {
+    const request = this.http.get<BidItems>(`${this.appUrl}/classes/BidItems/${id}`, { headers: this.headers });
     return request;
   }
 }
