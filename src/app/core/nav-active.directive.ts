@@ -20,7 +20,6 @@ export class NavActiveDirective implements OnInit {
     const targetElement = e.target as HTMLElement;
 
     const previousActiveLink = document.querySelector('.active');
-    console.log(previousActiveLink)
     if (previousActiveLink) {
       this.renderer.removeClass(previousActiveLink, 'active');
     }
