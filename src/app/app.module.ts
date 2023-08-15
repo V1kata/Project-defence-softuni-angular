@@ -8,6 +8,7 @@ import { CoreModule } from './core/core.module';
 import { MainComponent } from './main/main.component';
 import { BidsModule } from './bids/bids.module';
 import { UserModule } from './user/user.module';
+import { AppInterceptor } from './api.interceptor';
 
 @NgModule({
   declarations: [
@@ -20,9 +21,9 @@ import { UserModule } from './user/user.module';
     HttpClientModule,
     CoreModule,
     BidsModule,
-    UserModule
+    UserModule,
   ],
-  providers: [],
+  providers: [AppInterceptor],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

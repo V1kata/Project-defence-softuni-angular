@@ -17,7 +17,30 @@ export class UserService {
   constructor(private http: HttpClient) {}
 
   getUserProfile(id: string) {
-    const request = this.http.get<User>(`${this.appUrl}/users/${id}`, { headers: this.headers });
+    const request = this.http.get<User>(`${this.appUrl}/users/${id}`, {
+      headers: this.headers,
+    });
     return request;
+  }
+
+  register(username: string, email: string, image: string, password: string) {
+    const data = {
+      username,
+      email,
+      imageUrl: image,
+      password,
+      posts: [],
+    };
+    
+    return this.http.post<User>(`${this.appUrl}/users`, data, {
+      headers: this.headers,
+    });
+  }
+
+  login(username: string, password: string) {
+    const url = `${this.appUrl}/login?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`;
+    return this.http.get<User>(url, {
+      headers: this.headers,
+    });
   }
 }

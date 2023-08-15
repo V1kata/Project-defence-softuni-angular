@@ -30,4 +30,9 @@ export class ApiService {
     const request = this.http.get<BidItems>(`${this.appUrl}/classes/BidItems/${id}`, { headers: this.headers });
     return request;
   }
+
+  updateBidItem(id: string, data: BidItems) {
+    const request = this.http.put<BidItems>(`${this.appUrl}/classes/BidItems/${id}`, data, { headers: this.headers });
+    return request;
+  }
 }

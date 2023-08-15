@@ -1,11 +1,12 @@
 <main>
   <div class="errorContainer" *ngIf="loginForm.invalid">
-    <ng-container *ngIf="inputEmail.touched">
-      <p class="error" *ngIf="inputEmail.errors?.['required']">
-        Email is required!
+    <ng-container *ngIf="inputUsername.touched">
+      <p class="error" *ngIf="inputUsername.errors?.['required']">
+        Username is required!
       </p>
-      <p class="error" *ngIf="inputEmail.errors?.['appEmailValidator']">
-        Email is not valid!
+      <p class="error" *ngIf="inputUsername.errors?.['minlength']">
+        Username must be at least
+        {{inputUsername.errors?.['minlength']['requiredLength']}} characters!
       </p>
     </ng-container>
     <ng-container *ngIf="inputPassword.touched">
@@ -22,16 +23,16 @@
   <section class="forms">
     <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
       <h3>Login</h3>
-      <label for="email">Email</label>
+      <label for="username">Username</label>
       <input
-        type="email"
-        name="email"
+        type="username"
+        name="username"
         class="box"
-        id="email"
+        id="username"
         ngModel
         required
-        #inputEmail="ngModel"
-        [appEmailValidator]="appEmailDomains"
+        #inputUsername="ngModel"
+        minlength="4"
       />
       <label for="password">Password</label>
       <input

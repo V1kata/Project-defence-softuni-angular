@@ -26,8 +26,9 @@ export class DetailsComponent implements OnInit {
       this.apiService.getSpecificBid(id).subscribe({
         next: (res) => {
           this.selectedItem = res;
+          console.log(res)
 
-          this.userServise.getUserProfile(res.author.objectId).subscribe({
+          this.userServise.getUserProfile(res.author['objectId']).subscribe({
             next: (userRef) => {
               this.username = userRef.username;
 
