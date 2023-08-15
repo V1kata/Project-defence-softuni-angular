@@ -4,6 +4,7 @@ import { EditComponent } from './edit/edit.component';
 import { DetailsComponent } from './details/details.component';
 import { CatalogComponent } from './catalog/catalog.component';
 import { CreateComponent } from './create/create.component';
+import { AuthActivate } from '../core/guard/auth.activate';
 
 const routes: Routes = [
   {
@@ -13,18 +14,21 @@ const routes: Routes = [
   {
     path: 'edit/:id',
     component: EditComponent,
+    canActivate: [AuthActivate]
   },
   {
     path: 'details/:id',
-    component: DetailsComponent
+    component: DetailsComponent,
   },
   {
     path: 'create',
-    component: CreateComponent
+    component: CreateComponent,
+    canActivate: [AuthActivate]
   },
   {
     path: 'delete/:id',
-    component: CatalogComponent
+    component: CatalogComponent,
+    canActivate: [AuthActivate]
   }
 ];
 
