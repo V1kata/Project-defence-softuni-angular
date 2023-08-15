@@ -6,6 +6,7 @@ import { EditComponent } from './edit/edit.component';
 import { BidsRoutingModule } from './bids-routing.module';
 import { CreateComponent } from './create/create.component';
 import { FormsModule } from '@angular/forms';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     BidsRoutingModule,
     FormsModule,
+    SharedModule
   ],
   
 })

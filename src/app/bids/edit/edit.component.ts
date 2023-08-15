@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
+import { DEFAULT_IMAGE_DOMAINS } from 'src/app/shared/constants';
 import { BidItems } from 'src/app/types/BidItem';
 @Component({
   selector: 'app-edit',
@@ -11,6 +12,7 @@ import { BidItems } from 'src/app/types/BidItem';
 export class EditComponent implements OnInit {
   formData: BidItems | null = null;
   defaultType: string = 'sell';
+  appImageValidator = DEFAULT_IMAGE_DOMAINS;
   id: string | null = '';
   
   constructor(private route: ActivatedRoute, private apiService: ApiService, private router: Router) {}

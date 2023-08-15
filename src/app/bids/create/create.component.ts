@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
+import { DEFAULT_IMAGE_DOMAINS } from 'src/app/shared/constants';
 import { UserService } from 'src/app/user/user.service';
 
 @Component({
@@ -10,7 +11,9 @@ import { UserService } from 'src/app/user/user.service';
   styleUrls: ['./create.component.css'],
 })
 export class CreateComponent {
-  defaultType: string = 'Sell';
+  defaultType: string = 'sell';
+  appImageValidator = DEFAULT_IMAGE_DOMAINS;
+  
   @ViewChild('createForm') createForm: NgForm | undefined;
 
   constructor(
