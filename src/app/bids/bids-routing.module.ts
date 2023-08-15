@@ -21,6 +21,10 @@ const routes: Routes = [
   {
     path: 'create',
     component: CreateComponent
+  },
+  {
+    path: 'delete/:id',
+    component: CatalogComponent
   }
 ];
 

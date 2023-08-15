@@ -65,7 +65,6 @@ export class DetailsComponent implements OnInit {
   }
 
   deleteBid(id: string | undefined): void {
-    this.apiService.deleteBid(id);
-    this.router.navigate(['/catalog']);
+    this.apiService.deleteBid(id).subscribe(() => this.router.navigate(['/catalog']));
   } 
 }
