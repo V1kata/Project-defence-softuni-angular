@@ -1,1 +1,23 @@
-<p>profile works!</p>
+<main>
+  <section>
+    <div class="data">
+      <div class="profile-img">
+        <img [src]="profile?.imageUrl" alt="Blank profile" />
+      </div>
+
+      <div class="personal-data">
+        <p>Username: {{ profile?.username }}</p>
+        <p>Email: {{ profile?.email }}</p>
+        <p>{{ profile?.posts?.length || 0 }} posts</p>
+      </div>
+    </div>
+
+    <div class="auction-images" *ngFor="let post of creations">
+      <div class="photo">
+        <a [routerLink]="'/details/' + post.objectId">
+          <img [src]="post.imageUrl" alt="Truck" />
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
