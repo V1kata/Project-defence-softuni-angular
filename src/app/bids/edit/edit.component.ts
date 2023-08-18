@@ -50,7 +50,7 @@ export class EditComponent implements OnInit {
     };
     console.log(JSON.stringify(data));
 
-    this.apiService.updateBidItem(this.id!, data).subscribe({
+    this.apiService.editBidItem(this.id!, data).subscribe({
       next: (res) => {
         this.router.navigate([`/details/${this.formData?.objectId}`])
       },

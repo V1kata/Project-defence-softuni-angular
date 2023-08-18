@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
 import { BidItems } from 'src/app/types/BidItem';
@@ -15,6 +16,10 @@ export class DetailsComponent implements OnInit {
   selectedItem: BidItems | null = null;
   username: string | null = null;
   lastBidder: string = '';
+  currentUser: User | null = null;
+  showBidFormContainer: boolean = false;
+  bidAmount: number = 0;
+  hasBidded: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -29,15 +34,19 @@ export class DetailsComponent implements OnInit {
       this.apiService.getSpecificBid(id).subscribe({
         next: (res) => {
           this.selectedItem = res;
-
+          
           this.userService.getUserProfile(res.author['objectId']).subscribe({
             next: (userRef) => {
               this.username = userRef.username;
-
+              
               if (this.userService.user) {
-                const currentUser: User = this.userService.user;
-                this.owner = currentUser.posts.find(id => id === res.objectId) ? true : false;
+                this.currentUser = this.userService.user;
+                this.owner = this.currentUser.posts.find(id => id === res.objectId) ? true : false;
+                this.hasBidded = this.selectedItem?.bids.find(id => id === this.currentUser?.objectId) ? true : false;
                 console.log(this.owner)
+                console.log('------------')
+                console.log(this.selectedItem?.bids.filter(id => id === this.currentUser?.objectId))
+                console.log(this.hasBidded)
               }
 
               if (res.bids.length > 0) {
@@ -66,5 +75,35 @@ export class DetailsComponent implements OnInit {
 
   deleteBid(id: string | undefined): void {
     this.apiService.deleteBid(id).subscribe(() => this.router.navigate(['/catalog']));
-  } 
+  }
+
+  bidForItem(id: string | undefined, form: NgForm) {
+    const { bidPrice } = form.value;
+
+    if (this.currentUser?.objectId && this.selectedItem) {
+      this.selectedItem.bids.push(this.currentUser?.objectId);
+      this.selectedItem.price += bidPrice;
+    }
+
+    const data = {
+      bids: this.selectedItem?.bids,
+      price: this.selectedItem?.price
+    }
+
+    console.log(this.selectedItem);
+    console.log(form.value)
+    console.log(id)
+    this.apiService.updateBidItem(id, data).subscribe(() => {
+      alert('You succefully bidded for this item')
+      this.hideBidForm();
+    })
+  }
+
+  showBidForm() {
+    this.showBidFormContainer = true;
+  }
+
+  hideBidForm() {
+    this.showBidFormContainer = false;
+  }
 }
