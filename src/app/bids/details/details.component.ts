@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
+import { ErrorService } from 'src/app/core/error/error.service';
+import { LoaderService } from 'src/app/core/loader/loader.service';
 import { BidItems } from 'src/app/types/BidItem';
 import { User } from 'src/app/types/User';
 import { UserService } from 'src/app/user/user.service';
@@ -25,12 +27,15 @@ export class DetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private apiService: ApiService,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private loadService: LoaderService,
+    private errorService: ErrorService
   ) {}
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     if (id !== null) {
+      this.loadService.showLoader();
       this.apiService.getSpecificBid(id).subscribe({
         next: (res) => {
           this.selectedItem = res;
@@ -50,20 +55,29 @@ export class DetailsComponent implements OnInit {
                 this.userService.getUserProfile(lastBidUserId).subscribe({
                   next: (lastBidUser) => {
                     this.lastBidder = lastBidUser.username;
+                    this.loadService.hideLoader()
                   },
                   error: (err) => {
                     console.log(err);
+                    this.errorService.setError(err)
+                    this.loadService.hideLoader()
                   },
                 });
+              } else {
+                this.loadService.hideLoader()
               }
             },
             error: (err) => {
               console.log(err);
+              this.errorService.setError(err)
+              this.loadService.hideLoader()
             },
           });
         },
         error: (err) => {
           console.log('Error res ' + err);
+          this.errorService.setError(err)
+          this.loadService.hideLoader()
         },
       });
     }

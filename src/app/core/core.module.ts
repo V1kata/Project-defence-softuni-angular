@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 import { NavComponent } from './nav/nav.component';
 import { RouterModule } from '@angular/router';
 import { ErrorComponent } from './error/error.component';
+import { LoaderComponent } from './loader/loader.component';
 
 @NgModule({
   declarations: [
     NavComponent,
-    ErrorComponent
+    ErrorComponent,
+    LoaderComponent
   ],
   imports: [
     CommonModule,
@@ -15,7 +17,8 @@ import { ErrorComponent } from './error/error.component';
   ],
   exports: [
     NavComponent,
-    ErrorComponent
+    ErrorComponent,
+    LoaderComponent
   ]
 })
 export class CoreModule { }
