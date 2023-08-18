@@ -1,5 +1,4 @@
-<main>
-  <div class="errorContainer" *ngIf="loginForm.invalid">
+<div class="errorContainer" *ngIf="loginForm.invalid">
     <ng-container *ngIf="inputUsername.touched">
       <p class="error" *ngIf="inputUsername.errors?.['required']">
         Username is required!
@@ -56,4 +55,3 @@
       <p>Don't have an account ? <a routerLink="/register">Create one</a></p>
     </form>
   </section>
-</main>

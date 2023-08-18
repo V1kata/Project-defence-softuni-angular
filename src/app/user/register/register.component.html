@@ -1,4 +1,4 @@
-<main>
+
   <div class="errorContainer" *ngIf="form.invalid">
     <ng-container *ngIf="form.get('username')?.touched">
       <p class="error" *ngIf="form.get('username')?.errors?.['required']">
@@ -114,4 +114,4 @@
       <p>Don't have an account ? <a routerLink="/register">Create one</a></p>
     </form>
   </section>
-</main>
+
