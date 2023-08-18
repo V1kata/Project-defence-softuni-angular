@@ -1,4 +1,3 @@
-<main *ngIf="apiError$ | async as apiError">
-    <div class="errorContainer">
-        <p class="error">{{ errorMsg }}</p>
-    </div>
+<div class="errorContainer" *ngIf="apiError$ | async as apiError">
+  <p class="error">{{ errorMsg }}</p>
+</div>
