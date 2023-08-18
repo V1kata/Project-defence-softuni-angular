@@ -10,12 +10,13 @@ import { Router } from '@angular/router';
 import { Observable, catchError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { UserService } from './user/user.service';
+import { ErrorService } from './core/error/error.service';
 
 const { appUrl } = environment;
 
 @Injectable()
 export class AppInterceptor implements HttpInterceptor {
-  constructor(private router: Router, private userService: UserService) {}
+  constructor(private router: Router, private userService: UserService, private errorService: ErrorService) {}
 
   intercept(
     req: HttpRequest<any>,
@@ -37,11 +38,9 @@ export class AppInterceptor implements HttpInterceptor {
       catchError((err) => {
         if (err.status === 401) {
           this.router.navigate(['/login']);
+        } else {
+          this.errorService.setError(err);
         }
-        // } else {
-        //   this.errorServie.setError(err);
-        //   this.router.navigate(['/error']);
-        // }
 
         return [err];
       })

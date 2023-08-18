@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 import { NavComponent } from './nav/nav.component';
 import { RouterModule } from '@angular/router';
 import { NavActiveDirective } from './nav-active.directive';
+import { ErrorComponent } from './error/error.component';
 
 @NgModule({
   declarations: [
     NavComponent,
-    NavActiveDirective
+    NavActiveDirective,
+    ErrorComponent
   ],
   imports: [
     CommonModule,
@@ -15,7 +17,8 @@ import { NavActiveDirective } from './nav-active.directive';
   ],
   exports: [
     NavComponent,
-    NavActiveDirective
+    NavActiveDirective,
+    ErrorComponent
   ]
 })
 export class CoreModule { }

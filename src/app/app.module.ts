@@ -9,6 +9,7 @@ import { MainComponent } from './main/main.component';
 import { BidsModule } from './bids/bids.module';
 import { UserModule } from './user/user.module';
 import { appInterceptorProvider } from './api.interceptor';
+import { ErrorComponent } from './core/error/error.component';
 
 @NgModule({
   declarations: [
