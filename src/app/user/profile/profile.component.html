@@ -12,12 +12,20 @@
       </div>
     </div>
 
-    <div class="auction-images" *ngFor="let post of creations">
-      <div class="photo">
-        <a [routerLink]="'/details/' + post.objectId">
-          <img [src]="post.imageUrl" alt="Truck" />
-        </a>
+    <ng-container *ngIf="profile?.posts?.length">
+      <div class="auction-images" *ngFor="let post of creations">
+        <div class="photo">
+          <a [routerLink]="'/details/' + post.objectId">
+            <img [src]="post.imageUrl" alt="Truck" />
+          </a>
+        </div>
       </div>
-    </div>
+    </ng-container>
+
+    <ng-container *ngIf="!profile?.posts?.length">
+      <div class="auction-images">
+        <p className="noposts">You have no posts yet! Try and create some here => <a routerLink="/create">Create</a>
+      </div>
+    </ng-container>
   </section>
 </main>
