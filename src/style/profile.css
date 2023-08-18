@@ -6,11 +6,13 @@
 }
 
 .profile-img img {
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
     margin-right: 25px;
 }
 
-.personal-data p{
+.personal-data p {
     display: flex;
     font-size: 25px;
     margin-bottom: 15px;
@@ -23,14 +25,15 @@
     justify-content: space-evenly;
 }
 
-.photo img {
-    margin: 10px;
+.auction-images .photo img {
     width: 400px;
     height: 400px;
+    object-fit: cover;
     border-radius: 2px;
     box-shadow: 4px 4px 4px 4px #888888;
+    transition: box-shadow 0.3s;
 }
 
-.photo img:hover {
+.auction-images .photo img:hover {
     box-shadow: none;
 }
