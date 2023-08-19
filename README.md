@@ -26,6 +26,8 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
 
+<h2>For the project</h2>
+
 The server i am using is back4app, i will leave 1 premade user and some bid items
     * admin@abv.bg : admin
 
