@@ -94,3 +94,10 @@
     color: #444;
     cursor: pointer;
 }
+
+#togglePassword {
+    margin-left: -40px;
+    cursor: pointer;
+    font-size: 20px;
+    color: black;
+}

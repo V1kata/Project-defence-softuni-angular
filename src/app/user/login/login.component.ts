@@ -8,28 +8,46 @@ import { ErrorService } from 'src/app/core/error/error.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
   appEmailDomains = DEFAULT_EMAIL_DOMAINS;
+  showPass: boolean = false;
 
-  constructor(private userService: UserService, private router: Router, private errorService: ErrorService) {}
-  
+  constructor(
+    private userService: UserService,
+    private router: Router,
+    private errorService: ErrorService
+  ) {}
+
   login(form: NgForm): void {
     if (form.invalid) {
       console.log('bad form');
-      return
+      return;
     }
     const { username, password } = form.value;
 
     this.userService.login(username, password).subscribe({
       next: (res) => {
-        this.router.navigate(['/catalog'])
+        this.router.navigate(['/catalog']);
       },
       error: (err) => {
-        console.log(err)
-        this.errorService.setError(err)
-      }
-  })
+        console.log(err);
+        this.errorService.setError(err);
+      },
+    });
+  }
+
+  showPassword(): void {
+    this.showPass = !this.showPass;
+  }
+
+  toggleShowPassword(id: string) {
+    const inputField = document.querySelector(`#${id}`) as HTMLInputElement;
+
+    if (inputField) {
+      inputField.type = this.showPass ? 'password' : 'text';
+      this.showPassword();
+    }
   }
 }

@@ -1,117 +1,137 @@
+<div class="errorContainer" *ngIf="form.invalid">
+  <ng-container *ngIf="form.get('username')?.touched">
+    <p class="error" *ngIf="form.get('username')?.errors?.['required']">
+      Username is required!
+    </p>
+    <p class="error" *ngIf="form.get('username')?.errors?.['minlength']">
+      Username must be atleast 4 characters!
+    </p>
+  </ng-container>
 
-  <div class="errorContainer" *ngIf="form.invalid">
-    <ng-container *ngIf="form.get('username')?.touched">
-      <p class="error" *ngIf="form.get('username')?.errors?.['required']">
-        Username is required!
-      </p>
-      <p class="error" *ngIf="form.get('username')?.errors?.['minlength']">
-        Username must be atleast 4 characters!
-      </p>
-    </ng-container>
+  <ng-container *ngIf="form.get('email')?.touched">
+    <p *ngIf="form.get('email')?.errors?.['required']">Email is required!</p>
+    <p class="error" *ngIf="form.get('email')?.errors?.['appEmailValidator']">
+      Email is invalid!
+    </p>
+  </ng-container>
 
-    <ng-container *ngIf="form.get('email')?.touched">
-      <p *ngIf="form.get('email')?.errors?.['required']">Email is required!</p>
-      <p class="error" *ngIf="form.get('email')?.errors?.['appEmailValidator']">
-        Email is invalid!
-      </p>
-    </ng-container>
-
-    <ng-container *ngIf="form.get('passGroup')?.get('password')?.touched">
-      <p
-        class="error"
-        *ngIf="form.get('passGroup')?.get('password')?.errors?.['required']"
-      >
-        Password is required!
-      </p>
-      <p
-        class="error"
-        *ngIf="form.get('passGroup')?.get('password')?.errors?.['minlength']"
-      >
-        Password must be at least
-        {{
+  <ng-container *ngIf="form.get('passGroup')?.get('password')?.touched">
+    <p
+      class="error"
+      *ngIf="form.get('passGroup')?.get('password')?.errors?.['required']"
+    >
+      Password is required!
+    </p>
+    <p
+      class="error"
+      *ngIf="form.get('passGroup')?.get('password')?.errors?.['minlength']"
+    >
+      Password must be at least
+      {{
             form.get('passGroup')?.get('password')?.errors?.['minlength']?.['requiredLength']
-        }}
-        characters!
-      </p>
+      }}
+      characters!
+    </p>
+
+    <p
+      class="error"
+      *ngIf="form.get('passGroup')?.get('password')?.errors?.['appPasswordValidator']"
+    >
+      Password must have at least 1 capital letter, 1 non-capital letter, 1
+      number, and 1 special symbol.
+    </p>
+  </ng-container>
+
+  <ng-container *ngIf="form.get('passGroup')?.get('rePass')?.touched">
+    <p
+      class="error"
+      *ngIf="form.get('passGroup')?.errors?.['matchPassValidator']"
+    >
+      Repeat Password does not match password!
+    </p>
+  </ng-container>
+
+  <ng-container *ngIf="form.get('image')?.touched">
+    <p class="error" *ngIf="form.get('image')?.errors?.['appImageValidator']">
+      Image is not valid!
+    </p>
+    <p class="error" *ngIf="form.get('image')?.errors?.['required']">
+      Image is required!
+    </p>
+  </ng-container>
+</div>
+
+<section class="forms">
+  <form [formGroup]="form" (ngSubmit)="register()">
+    <h3>Register</h3>
+    <label for="username">Username</label>
+    <input
+      type="username"
+      name="username"
+      class="box"
+      id="username"
+      formControlName="username"
+      minlength="4"
+    />
+
+    <label for="email">Email</label>
+    <input
+      type="email"
+      name="email"
+      class="box"
+      id="email"
+      formControlName="email"
+    />
+
+    <label for="image">Image</label>
+    <input
+      type="text"
+      name="image"
+      class="box"
+      id="image"
+      formControlName="image"
+    />
+
+    <ng-container formGroupName="passGroup">
+      <label for="password">Password</label>
+      <input
+        type="password"
+        name="password"
+        class="box"
+        id="password"
+        formControlName="password"
+      />
+      <i
+        class="far fa-eye"
+        id="togglePassword"
+        [class.fa-eye]="!showPass"
+        [class.fa-eye-slash]="showPass"
+        (click)="toggleShowPassword('password')"
+      ></i>
+
+      <label for="rePass">Repeat password</label>
+      <input
+        type="password"
+        name="rePass"
+        class="box"
+        id="rePass"
+        formControlName="rePass"
+      />
+      <i
+        class="far fa-eye"
+        id="togglePassword"
+        [class.fa-eye]="!showPass"
+        [class.fa-eye-slash]="showPass"
+        (click)="toggleShowPassword('rePass')"
+      ></i>
     </ng-container>
 
-    <ng-container *ngIf="form.get('passGroup')?.get('rePass')?.touched">
-      <p
-        class="error"
-        *ngIf="form.get('passGroup')?.errors?.['matchPassValidator']"
-      >
-        Repeat Password does not match password!
-      </p>
-    </ng-container>
-
-    <ng-container *ngIf="form.get('image')?.touched">
-      <p class="error" *ngIf="form.get('image')?.errors?.['appImageValidator']">
-        Image is not valid!
-      </p>
-      <p class="error" *ngIf="form.get('image')?.errors?.['required']">
-        Image is required!
-      </p>
-    </ng-container>
-  </div>
-
-  <section class="forms">
-    <form [formGroup]="form" (ngSubmit)="register()">
-      <h3>Register</h3>
-      <label for="username">Username</label>
-      <input
-        type="username"
-        name="username"
-        class="box"
-        id="username"
-        formControlName="username"
-        minlength="4"
-      />
-
-      <label for="email">Email</label>
-      <input
-        type="email"
-        name="email"
-        class="box"
-        id="email"
-        formControlName="email"
-      />
-
-      <label for="image">Image</label>
-      <input
-        type="text"
-        name="image"
-        class="box"
-        id="image"
-        formControlName="image"
-      />
-
-      <ng-container formGroupName="passGroup">
-        <label for="password">Password</label>
-        <input
-          type="password"
-          name="password"
-          class="box"
-          id="password"
-          formControlName="password"
-        />
-
-        <label for="rePass">Repeat password</label>
-        <input
-          type="password"
-          name="rePass"
-          class="box"
-          id="rePass"
-          formControlName="rePass"
-        />
-      </ng-container>
-
-      <input
-        type="submit"
-        value="Register"
-        class="btn"
-        [disabled]="form.invalid"
-      />
-      <p>Don't have an account ? <a routerLink="/register">Create one</a></p>
-    </form>
-  </section>
-
+    <input
+      type="submit"
+      value="Register"
+      class="btn"
+      [disabled]="form.invalid"
+    />
+    <p>Don't have an account ? <a routerLink="/register">Create one</a></p>
+  </form>
+</section>
