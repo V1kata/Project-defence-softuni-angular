@@ -11,7 +11,7 @@ import { UserService } from 'src/app/user/user.service';
   styleUrls: ['./create.component.css'],
 })
 export class CreateComponent {
-  defaultType: string = 'sell';
+  defaultType: string = 'Sell';
   appImageValidator = DEFAULT_IMAGE_DOMAINS;
   
   @ViewChild('createForm') createForm: NgForm | undefined;

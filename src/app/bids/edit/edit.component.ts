@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
+import { ErrorService } from 'src/app/core/error/error.service';
 import { LoaderService } from 'src/app/core/loader/loader.service';
 import { DEFAULT_IMAGE_DOMAINS } from 'src/app/shared/constants';
 import { BidItems } from 'src/app/types/BidItem';
@@ -12,7 +13,7 @@ import { BidItems } from 'src/app/types/BidItem';
 })
 export class EditComponent implements OnInit {
   formData: BidItems | null = null;
-  defaultType: string = 'sell';
+  defaultType: string = 'Sell';
   appImageValidator = DEFAULT_IMAGE_DOMAINS;
   id: string | null = '';
 
@@ -20,7 +21,8 @@ export class EditComponent implements OnInit {
     private route: ActivatedRoute,
     private apiService: ApiService,
     private router: Router,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    private errorService: ErrorService
   ) {}
 
   ngOnInit(): void {
@@ -31,11 +33,10 @@ export class EditComponent implements OnInit {
       this.apiService.getSpecificBid(this.id).subscribe({
         next: (res) => {
           this.formData = res;
-          this.defaultType = res.type.toLowerCase();
           this.loaderService.hideLoader();
         },
         error: (err) => {
-          console.log(err);
+          this.errorService.setError(err);
         },
       });
     }

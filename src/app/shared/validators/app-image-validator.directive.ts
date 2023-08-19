@@ -1,9 +1,16 @@
 import { Directive, Input, SimpleChanges } from '@angular/core';
-import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
+import { AbstractControl, NG_VALIDATORS, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { appImageValidator } from './app-image-validator';
 
 @Directive({
-  selector: '[appImageValidator]'
+  selector: '[appImageValidator]',
+  providers: [
+    {
+      provide: NG_VALIDATORS,
+      useExisting: AppImageValidatorDirective,
+      multi: true,
+    },
+  ],
 })
 export class AppImageValidatorDirective {
 
