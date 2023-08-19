@@ -18,7 +18,6 @@ export class AppImageValidatorDirective {
 
   ngOnChanges(changes: SimpleChanges): void {
     const currentChanges = changes['appImageValidator'];
-    console.log(changes)
 
     if (currentChanges) {
       this.validator = appImageValidator(currentChanges.currentValue);

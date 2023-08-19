@@ -8,8 +8,4 @@ import { LoaderService } from './loader.service';
 })
 export class LoaderComponent {
   constructor(public loaderService: LoaderService) {}
-  
-  get isLoaderHidden(): boolean {
-    return this.loaderService.isHidden;
-  }
 }
