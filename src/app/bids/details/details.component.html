@@ -12,7 +12,7 @@
         <h3 *ngIf="lastBidder">Last bidder's username: {{ lastBidder }}</h3>
 
         <div class="buttons">
-          <ng-container *ngIf="owner">
+          <ng-container *ngIf="owner && !lastBidder">
             <a [routerLink]="'/edit/' + selectedItem?.objectId" class="btn-edit"
               >Edit</a
             >

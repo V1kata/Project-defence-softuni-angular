@@ -55,6 +55,7 @@ export class DetailsComponent implements OnInit {
                 this.userService.getUserProfile(lastBidUserId).subscribe({
                   next: (lastBidUser) => {
                     this.lastBidder = lastBidUser.username;
+                    console.log(!!lastBidUser)
                     this.loadService.hideLoader()
                   },
                   error: (err) => {
