@@ -19,7 +19,7 @@ export class UserService {
     return !!this.user;
   }
 
-  subscription: Subscription;
+  private subscription: Subscription = new Subscription();
 
   private appUrl = environment.appUrl;
   private headers = new HttpHeaders({
@@ -29,9 +29,11 @@ export class UserService {
   });
 
   constructor(private http: HttpClient) {
-    this.subscription = this.user$.subscribe((user) => {
-      this.user = user;
-    });
+    this.subscription.add(
+      this.user$.subscribe((user) => {
+        this.user = user;
+      })
+    );
   }
 
   getUserProfile(id: string | undefined) {
@@ -48,7 +50,6 @@ export class UserService {
       .put<User>(`${this.appUrl}/users/${id}`, data, {
         headers: this.headers,
       })
-      .pipe(tap((user) => this.user$$.next(user)));
   }
 
   register(username: string, email: string, image: string, password: string) {
@@ -65,7 +66,7 @@ export class UserService {
         headers: this.headers,
       })
       .pipe(tap((user) => {
-        this.user$$.next(user);
+        this.user = user;
         this.setSessionToken(user.sessionToken);
       }));
   }

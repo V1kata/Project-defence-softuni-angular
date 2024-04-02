@@ -25,6 +25,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.loaderService.showLoader();
     this.profile = this.userService.user;
+    console.log(this.profile)
     this.apiService.getCatalog().subscribe({
       next: (res: any) => {
         this.creations = res.results.filter(

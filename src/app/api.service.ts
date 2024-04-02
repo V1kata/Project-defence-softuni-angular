@@ -81,7 +81,7 @@ export class ApiService {
           const index = user.posts.indexOf(objectId);
           if (index !== -1) {
             user.posts.splice(index, 1);
-            console.log(user)
+            this.userService.user = user;
           }
         }
       }),
