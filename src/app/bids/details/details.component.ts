@@ -45,8 +45,7 @@ export class DetailsComponent implements OnInit {
               this.username = userRef.username;
               
               if (this.userService.user) {
-                this.currentUser = this.userService.user;
-                this.owner = res.author.objectId === this.currentUser.objectId ? true : false;
+                this.owner = res.author.objectId === userRef.objectId ? true : false;
                 this.hasBidded = this.selectedItem?.bids.find(id => id === this.currentUser?.objectId) ? true : false;
               }
 
